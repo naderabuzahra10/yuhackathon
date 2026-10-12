@@ -1,0 +1,378 @@
+[
+  {
+    "name": "get_today",
+    "description": "The student's day: current date and time (Riyadh), next class with room, classes today, upcoming events, counts of tasks due, pending approvals, unread notifications and unexcused absences, credits earned.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_registration",
+    "description": "Registration for next term: every proposal with its status (needs_review, approved, submitted), the chosen sections, the alternative options (A, B, C) with courses, meeting times, credits, trade-offs and failed checks, and what the planner understood from the student's preferences.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "plan_registration",
+    "description": "Plan next term's registration from the student's wishes. Searches every combination of open sections the student is eligible for, writes the best fit into a new draft, and returns up to three plans (A is applied) with each rule marked MET or NOT MET and the reason. Nothing is approved or submitted. Put every wish into the structured fields; also pass the student's own words in preferences_text. If already_registered is present in the result, the student already has a registration for that term and plans can only add to it.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "preferences_text": {
+          "type": "string",
+          "description": "The student's wishes in their own words."
+        },
+        "avoid_days": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          },
+          "description": "Weekdays that must stay free. 0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday."
+        },
+        "min_credits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 24,
+          "description": "Minimum credits for the term."
+        },
+        "max_credits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 24,
+          "description": "Maximum credits for the term."
+        },
+        "earliest_start": {
+          "type": "string",
+          "description": "Classes should start at or after this time, 24h HH:MM, e.g. '10:00'."
+        },
+        "earliest_start_strict": {
+          "type": "boolean",
+          "description": "True only if the student said never or must. False for 'usually', 'prefer', 'if possible'."
+        },
+        "latest_end": {
+          "type": "string",
+          "description": "Classes should end by this time, 24h HH:MM, e.g. '15:00'."
+        },
+        "latest_end_strict": {
+          "type": "boolean",
+          "description": "True only if the student said never or must."
+        },
+        "compact": {
+          "type": "boolean",
+          "description": "Prefer fewer days on campus."
+        },
+        "include_courses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Course codes that must be in the plan, e.g. 'CIS 443'."
+        },
+        "exclude_courses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Course codes to leave out."
+        },
+        "with_friend": {
+          "type": "string",
+          "description": "First name of a connected classmate to share sections with, or 'all' for every connected classmate. Only when the student asks to plan with someone."
+        }
+      },
+      "required": [
+        "preferences_text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "choose_registration_option",
+    "description": "Switch a draft to another of its plans (A, B or C) from plan_registration or get_registration. Only for drafts that are not submitted.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "proposal_id": {
+          "type": "string"
+        },
+        "option_id": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      "required": [
+        "proposal_id",
+        "option_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "approve_registration",
+    "description": "Record the student's approval of the exact sections in a proposal. The app asks the student to confirm first. Fails if a hard check fails.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "proposal_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "proposal_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "submit_registration",
+    "description": "Send an approved proposal to the registration portal (a labelled demo adapter). The app asks the student to confirm first. Returns the portal reference.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "proposal_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "proposal_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_classmates",
+    "description": "Classmates the student has connected with for registration: first names, the courses and sections each shares, and where they already match the student. Connections are made in person with an invite code on the Register page.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "search_resources",
+    "description": "Search student-shared learning resources (notes, slides, summaries, past exams, cheat sheets, lab material). Returns ids, titles, course, type, helpful votes and pages.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "course_code": {
+          "type": "string",
+          "description": "e.g. 'SWE 312'"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "read_resource",
+    "description": "Read the text of one learning resource, as numbered paragraphs, so you can summarise or explain it. Cite paragraph numbers like [2] when you summarise.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "resource_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "start_practice",
+    "description": "Open the study coach on one learning resource: a quiz with the reason behind each answer, or flashcards. Use search_resources first to find the resource. Use this when the student says 'quiz me', 'test me' or asks for flashcards.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "resource_id": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "quiz",
+            "cards"
+          ]
+        }
+      },
+      "required": [
+        "resource_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "plan_revision",
+    "description": "Work out revision sittings for the assessments in the next three weeks, placed in free time around classes, one a day working back from each date. Returns the plan without saving it.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "add_revision_plan",
+    "description": "Save the plan from plan_revision into the study planner. The app asks the student to confirm first. Call plan_revision before this.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "list_events",
+    "description": "Upcoming campus and club events with time, venue, seats left, whether the student is going, and timetable conflicts.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "rsvp_event",
+    "description": "Reserve a seat at an event for the student. The app asks the student to confirm first.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_attendance",
+    "description": "Attendance this term per course: present, late, absent and excused counts, absence percentage against the warning and denial thresholds.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_study_tasks",
+    "description": "Open study tasks, assessments and reminders with deadlines; overdue ones are flagged.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "add_study_task",
+    "description": "Add a study task or reminder from one plain sentence, e.g. 'Revise SWE 312 chapter 4 on Tuesday at 5pm'.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_rewards",
+    "description": "UniPoints loyalty programme: the student's balance, how the points were earned, active vouchers, and the campus outlets (Barn's, Kaftoon, Key Coffee, Go Greek, Erleens Burger, SPAR, Dunkin' Donuts) with menu items and their point prices.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "redeem_reward",
+    "description": "Spend points on one menu item and issue a voucher code to show at the counter. The app asks the student to confirm first.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "An item id from get_rewards."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "find_place",
+    "description": "Find buildings, rooms and services on the campus map by name. Returns ids to use with open_page as /campus/map?to=<id>.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_prerequisites",
+    "description": "For one course in the student's programme: what it requires, what it unlocks, and the student's status in each of those courses.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "course_code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "course_code"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_opportunities",
+    "description": "Internships, co-ops and jobs ranked by how well they match the student's evidence-backed skills, with deadlines.",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "open_page",
+    "description": "Open a page of the app for the student. Paths: /today, /academics, /academics/register, /academics/timetable, /academics/attendance, /academics/study, /academics/gpa, /prereqs, /campus, /campus/events, /campus/events/<id>, /campus/rewards, /campus/resources, /campus/map, /campus/map?to=<location id>, /campus/card, /portfolio, /portfolio/cv (the student's CV, already built from their portfolio: open it when they ask for a CV or resume), /career, /competitions, /journey.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

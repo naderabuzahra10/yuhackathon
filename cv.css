@@ -1,0 +1,413 @@
+/* The CV sheet: a page of A4 sized in real units, so the print is the preview. It is paper: white
+   in both themes, with its own ink and one accent. Every space inside is in em, so one variable
+   (--cv-d) tightens the whole page until it fits. */
+
+.cv-sheet {
+  --cv-accent: #0e4a3b;
+  --cv-ink: #16181b;
+  --cv-soft: #4a5057;
+  --cv-faint: #868c93;
+  --cv-rule: #d9dde1;
+  --cv-d: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 15mm 16mm 11mm;
+  background: #fff;
+  color: var(--cv-ink);
+  font-family: 'Mona Sans Variable', 'Noto Kufi Arabic Variable', ui-sans-serif, system-ui, sans-serif;
+  font-size: calc(9.6pt * var(--cv-d));
+  font-stretch: 100%;
+  font-weight: 420;
+  line-height: 1.46;
+  letter-spacing: 0;
+  text-align: start;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.cv-sheet[dir='rtl'] {
+  font-family: 'Noto Kufi Arabic Variable', 'Mona Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.7;
+}
+.cv-sheet *,
+.cv-sheet *::before,
+.cv-sheet *::after {
+  box-sizing: border-box;
+}
+:where(.cv-sheet) :where(h1, h2, h3, p, ul, dl, dt, dd) {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+:where(.cv-sheet) ul {
+  list-style: none;
+}
+:where(.cv-sheet) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Name and contact */
+.cv-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8mm;
+  padding-bottom: 1.45em;
+  border-bottom: 1.6pt solid var(--cv-accent);
+}
+.cv-name {
+  font-size: 2.7em;
+  line-height: 1.04;
+  font-weight: 760;
+  font-stretch: 110%;
+  letter-spacing: -0.03em;
+}
+.cv-sheet[dir='rtl'] .cv-name {
+  line-height: 1.35;
+  letter-spacing: 0;
+  font-stretch: 100%;
+}
+.cv-headline {
+  margin-top: 0.5em;
+  font-size: 1.2em;
+  font-weight: 560;
+  line-height: 1.3;
+  color: var(--cv-accent);
+}
+.cv-contact {
+  flex: none;
+  max-width: 62mm;
+  text-align: end;
+  font-size: 0.93em;
+  line-height: 1.6;
+  color: var(--cv-soft);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.cv-contact b {
+  font-weight: 660;
+  color: var(--cv-ink);
+}
+
+/* Sections */
+.cv-h {
+  font-size: 0.8em;
+  line-height: 1.5;
+  font-weight: 720;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--cv-accent);
+}
+.cv-sheet[dir='rtl'] .cv-h {
+  font-size: 0.95em;
+  letter-spacing: 0;
+}
+.cv-classic .cv-sec {
+  display: grid;
+  grid-template-columns: 30mm minmax(0, 1fr);
+  column-gap: 6mm;
+  padding-block: 1.2em;
+  border-bottom: 0.5pt solid var(--cv-rule);
+}
+.cv-classic .cv-sec:last-of-type {
+  border-bottom: 0;
+}
+.cv-classic .cv-h {
+  padding-top: 0.24em;
+}
+
+/* Entries */
+.cv-entry + .cv-entry {
+  margin-top: 0.85em;
+}
+.cv-entry.cv-tight + .cv-entry.cv-tight {
+  margin-top: 0.36em;
+}
+.cv-entry-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 5mm;
+}
+.cv-entry-title {
+  min-width: 0;
+  text-wrap: pretty;
+  font-weight: 680;
+  line-height: 1.38;
+}
+.cv-entry-org {
+  font-weight: 420;
+  color: var(--cv-soft);
+}
+.cv-date {
+  flex: none;
+  font-size: 0.92em;
+  color: var(--cv-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.cv-org {
+  color: var(--cv-soft);
+}
+.cv-facts {
+  margin-top: 0.22em;
+}
+.cv-facts b,
+.cv-course b {
+  font-weight: 660;
+}
+.cv-course {
+  margin-top: 0.22em;
+  color: var(--cv-soft);
+}
+.cv-course b {
+  color: var(--cv-ink);
+}
+.cv-bullets {
+  margin-top: 0.32em;
+}
+.cv-bullets li {
+  position: relative;
+  padding-inline-start: 1.05em;
+}
+.cv-bullets li + li {
+  margin-top: 0.12em;
+}
+.cv-bullets li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0.12em;
+  top: 0.6em;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 50%;
+  background: var(--cv-accent);
+}
+.cv-sheet[dir='rtl'] .cv-bullets li::before {
+  top: 0.75em;
+}
+.cv-seal {
+  display: inline-block;
+  width: 1.02em;
+  height: 1.02em;
+  margin-inline-start: 0.36em;
+  vertical-align: -0.14em;
+  color: var(--cv-accent);
+}
+
+/* Skills */
+.cv-skills .cv-row {
+  display: grid;
+  grid-template-columns: 9.4em minmax(0, 1fr);
+  column-gap: 1em;
+}
+.cv-skills .cv-row + .cv-row {
+  margin-top: 0.34em;
+}
+.cv-skills dt {
+  font-weight: 660;
+}
+
+/* The note that says what the seal means */
+.cv-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: auto;
+  padding-top: 1.5em;
+  font-size: 0.78em;
+  color: var(--cv-faint);
+}
+.cv-foot .cv-seal {
+  margin: 0;
+}
+
+/* ── Modern: a band of the accent down one side ── */
+.cv-modern {
+  flex-direction: row;
+  padding: 0;
+}
+.cv-side {
+  flex: none;
+  width: 65mm;
+  padding: 15mm 8mm 11mm 11mm;
+  background: var(--cv-accent);
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+.cv-sheet[dir='rtl'] .cv-side {
+  padding: 15mm 11mm 11mm 8mm;
+}
+.cv-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15mm 14mm 11mm 11mm;
+}
+.cv-sheet[dir='rtl'] .cv-main {
+  padding: 15mm 11mm 11mm 14mm;
+}
+.cv-mono {
+  display: grid;
+  place-items: center;
+  width: 17mm;
+  height: 17mm;
+  border-radius: 4.6mm;
+  background: rgb(255 255 255 / 0.15);
+  font-size: 1.95em;
+  font-weight: 740;
+  font-stretch: 108%;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.cv-side .cv-block {
+  margin-top: 2.1em;
+}
+.cv-side .cv-h {
+  margin-bottom: 0.85em;
+  padding-bottom: 0.6em;
+  border-bottom: 0.5pt solid rgb(255 255 255 / 0.32);
+  color: rgb(255 255 255 / 0.74);
+}
+.cv-side-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  line-height: 1.4;
+}
+.cv-side-list li + li {
+  margin-top: 0.5em;
+}
+.cv-side-list svg {
+  flex: none;
+  width: 1.08em;
+  height: 1.08em;
+  margin-top: 0.14em;
+  opacity: 0.8;
+}
+.cv-group + .cv-group {
+  margin-top: 0.85em;
+}
+.cv-group-label {
+  font-size: 0.9em;
+  font-weight: 680;
+}
+.cv-group-list {
+  color: rgb(255 255 255 / 0.84);
+  line-height: 1.5;
+}
+.cv-side .cv-sub {
+  font-size: 0.88em;
+  color: rgb(255 255 255 / 0.72);
+}
+.cv-side .cv-club + .cv-club {
+  margin-top: 0.6em;
+}
+.cv-side .cv-club b {
+  display: block;
+  font-weight: 640;
+  line-height: 1.35;
+}
+.cv-modern .cv-head {
+  display: block;
+  padding-bottom: 0.2em;
+  border-bottom: 0;
+}
+.cv-modern .cv-sec {
+  padding-top: 1.55em;
+}
+.cv-modern .cv-main .cv-h {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  margin-bottom: 0.7em;
+}
+.cv-modern .cv-main .cv-h::after {
+  content: '';
+  flex: 1;
+  height: 0.5pt;
+  background: var(--cv-rule);
+}
+
+/* ── On screen: the sheet scaled into whatever room there is ── */
+.cv-stage {
+  position: relative;
+  direction: ltr;
+  width: 100%;
+  max-width: 210mm;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(20 30 26 / 0.07),
+    0 2px 4px rgb(20 30 26 / 0.06),
+    0 22px 48px -18px rgb(20 30 26 / 0.34);
+}
+.cv-stage .cv-sheet {
+  transform: scale(var(--cv-s, 1));
+  transform-origin: top left;
+}
+.cv-break {
+  position: absolute;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 0;
+  border-top: 1.5px dashed oklch(0.7 0.15 60);
+  pointer-events: none;
+}
+.cv-break span {
+  margin-inline-start: auto;
+  transform: translateY(-50%);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: oklch(0.95 0.07 85);
+  color: oklch(0.42 0.1 60);
+  font:
+    700 11px/1.4 'Mona Sans Variable',
+    sans-serif;
+}
+
+/* ── In print: only the sheet, at its real size ── */
+.cv-print-root {
+  display: none;
+}
+@media print {
+  html:has(.cv-print-root),
+  html:has(.cv-print-root) body {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  html:has(.cv-print-root) body > :not(.cv-print-root) {
+    display: none !important;
+  }
+  .cv-print-root {
+    display: block;
+  }
+  .cv-print-root .cv-sheet {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  /* A page that fits is cut to exactly one sheet, so a rounding hair never spills a blank second page. */
+  .cv-print-root .cv-sheet.cv-one {
+    height: 296.9mm;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .cv-entry,
+  .cv-row {
+    break-inside: avoid;
+  }
+  .cv-h {
+    break-after: avoid;
+  }
+}

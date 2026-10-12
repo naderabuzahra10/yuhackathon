@@ -1,0 +1,14 @@
+{
+  "name": "UniJourney – Al Yamamah University (demo)",
+  "short_name": "UniJourney",
+  "description": "Connected student journey: admission, academics, campus life, career.",
+  "start_url": "/today",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f6f9",
+  "theme_color": "#141a2b",
+  "lang": "en",
+  "dir": "auto",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

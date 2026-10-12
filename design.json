@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T00:00:00.000Z",
+  "title": "Design System: UniJourney",
+  "extensions": {
+    "colorMeta": {
+      "pine": { "role": "primary", "displayName": "Pine", "canonical": "oklch(0.33 0.075 160)", "tonalRamp": ["oklch(0.945 0.04 150)", "oklch(0.4 0.09 158)", "oklch(0.33 0.075 160)", "oklch(0.28 0.062 160)"] },
+      "lime": { "role": "primary", "displayName": "Lime", "canonical": "oklch(0.9 0.19 128)", "tonalRamp": ["oklch(0.94 0.17 126)", "oklch(0.9 0.19 128)", "oklch(0.85 0.2 130)", "oklch(0.28 0.075 145)"] },
+      "points-orange": { "role": "secondary", "displayName": "Points Orange", "canonical": "oklch(0.74 0.17 55)", "tonalRamp": ["oklch(0.955 0.04 68)", "oklch(0.8 0.15 62)", "oklch(0.74 0.17 55)", "oklch(0.24 0.06 50)"] },
+      "study-blue": { "role": "tertiary", "displayName": "Study Blue", "canonical": "oklch(0.56 0.18 258)", "tonalRamp": ["oklch(0.95 0.03 255)", "oklch(0.56 0.18 258)", "oklch(0.45 0.17 260)"] },
+      "campus-orange": { "role": "tertiary", "displayName": "Campus Orange", "canonical": "oklch(0.72 0.17 52)", "tonalRamp": ["oklch(0.955 0.04 68)", "oklch(0.72 0.17 52)", "oklch(0.5 0.14 46)"] },
+      "career-orchid": { "role": "tertiary", "displayName": "Career Orchid", "canonical": "oklch(0.56 0.2 318)", "tonalRamp": ["oklch(0.955 0.035 320)", "oklch(0.56 0.2 318)", "oklch(0.45 0.18 318)"] },
+      "done-green": { "role": "tertiary", "displayName": "Done Green", "canonical": "oklch(0.62 0.16 152)", "tonalRamp": ["oklch(0.95 0.045 152)", "oklch(0.62 0.16 152)", "oklch(0.41 0.115 152)"] },
+      "pending-yellow": { "role": "tertiary", "displayName": "Pending Yellow", "canonical": "oklch(0.85 0.16 90)", "tonalRamp": ["oklch(0.96 0.07 95)", "oklch(0.85 0.16 90)", "oklch(0.47 0.1 78)"] },
+      "needs-you-red": { "role": "tertiary", "displayName": "Needs-you Red", "canonical": "oklch(0.6 0.21 26)", "tonalRamp": ["oklch(0.955 0.032 24)", "oklch(0.6 0.21 26)", "oklch(0.49 0.19 27)"] },
+      "ground": { "role": "neutral", "displayName": "Ground", "canonical": "oklch(0.972 0.006 150)", "tonalRamp": ["oklch(0.997 0.002 150)", "oklch(0.972 0.006 150)", "oklch(0.958 0.008 150)", "oklch(0.925 0.012 150)"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "oklch(0.21 0.028 165)", "tonalRamp": ["oklch(0.54 0.02 165)", "oklch(0.44 0.022 165)", "oklch(0.21 0.028 165)"] }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Figure", "purpose": "The course code on the class pass and the points balance. Wide cut, tabular figures." },
+      "display": { "displayName": "Page title", "purpose": "One per page." },
+      "title": { "displayName": "Title", "purpose": "Card and section headings." },
+      "body": { "displayName": "Body", "purpose": "Everything read; prose capped at 68ch." },
+      "label": { "displayName": "Label", "purpose": "Data labels and navigation group names, sentence case." }
+    },
+    "shadows": [
+      { "name": "card", "value": "0 1px 2px oklch(0.3 0.05 160 / 0.05), 0 10px 28px -16px oklch(0.3 0.05 160 / 0.16)", "purpose": "Every card at rest." },
+      { "name": "lift", "value": "0 2px 4px oklch(0.25 0.05 160 / 0.06), 0 18px 36px -16px oklch(0.25 0.05 160 / 0.26)", "purpose": "Hover on a linked card; the phone dock." },
+      { "name": "pop", "value": "0 2px 6px oklch(0.25 0.05 160 / 0.08), 0 28px 56px -18px oklch(0.25 0.05 160 / 0.34)", "purpose": "Menus, dialogs and the open assistant panel." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrances, presses and anything answering the pointer." },
+      { "name": "ease-drawer", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "The assistant panel, the phone drawer and bottom sheets, 300 to 320ms." },
+      { "name": "rise", "value": "460ms ease-out, 55ms stagger", "purpose": "Cards dealing in once on a page's first paint." },
+      { "name": "press", "value": "scale(0.97), 140ms", "purpose": "Every pressable control." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on a light surface.",
+      "html": "<button class=\"ds-btn-primary\">Approve this exact list</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 17px; border: 0; border-radius: 999px; background: oklch(0.33 0.075 160); color: oklch(0.985 0.012 140); font: 640 14px/1 'Mona Sans Variable', system-ui, sans-serif; box-shadow: 0 1px 0 oklch(1 0 0 / 0.14) inset; cursor: pointer; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 140ms ease; } .ds-btn-primary:hover { background: oklch(0.4 0.09 158); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.38 0.09 158); outline-offset: 2px; }"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The assistant's Ask and Send buttons, and the action on a pine pass.",
+      "html": "<button class=\"ds-btn-accent\">Ask</button>",
+      "css": ".ds-btn-accent { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 17px; border: 0; border-radius: 999px; background: oklch(0.9 0.19 128); color: oklch(0.28 0.075 145); font: 640 14px/1 'Mona Sans Variable', system-ui, sans-serif; cursor: pointer; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 140ms ease; } .ds-btn-accent:hover { background: oklch(0.93 0.16 128); } .ds-btn-accent:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Second-rank actions.",
+      "html": "<button class=\"ds-btn-secondary\">Timetable</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; height: 40px; padding: 0 17px; border: 1px solid oklch(0.84 0.014 150); border-radius: 999px; background: oklch(0.997 0.002 150); color: oklch(0.21 0.028 165); font: 640 14px/1 'Mona Sans Variable', system-ui, sans-serif; cursor: pointer; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 140ms ease; } .ds-btn-secondary:hover { background: oklch(0.958 0.008 150); } .ds-btn-secondary:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "A state or count in its tone's tint.",
+      "html": "<span class=\"ds-chip\">All hard checks pass</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 999px; background: oklch(0.95 0.045 152); color: oklch(0.41 0.115 152); font: 640 12px/1 'Mona Sans Variable', system-ui, sans-serif; white-space: nowrap; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The default container for a list or a form.",
+      "html": "<section class=\"ds-card\"><h3>Inbox</h3><p>2 absences to excuse</p></section>",
+      "css": ".ds-card { padding: 20px; border: 1px solid oklch(0.918 0.009 150 / 0.8); border-radius: 20px; background: oklch(0.997 0.002 150); color: oklch(0.21 0.028 165); box-shadow: 0 1px 2px oklch(0.3 0.05 160 / 0.05), 0 10px 28px -16px oklch(0.3 0.05 160 / 0.16); font: 400 15px/1.5 'Mona Sans Variable', system-ui, sans-serif; } .ds-card h3 { margin: 0 0 8px; font-size: 17px; font-weight: 680; } .ds-card p { margin: 0; color: oklch(0.44 0.022 165); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Single-line input with the lime focus halo.",
+      "html": "<input class=\"ds-input\" placeholder=\"Search notes\" />",
+      "css": ".ds-input { width: 100%; height: 44px; padding: 0 14px; border: 1px solid oklch(0.84 0.014 150); border-radius: 12px; background: oklch(0.997 0.002 150); color: oklch(0.21 0.028 165); font: 400 15px/1 'Mona Sans Variable', system-ui, sans-serif; transition: border-color 140ms ease, box-shadow 140ms ease; } .ds-input::placeholder { color: oklch(0.54 0.02 165); } .ds-input:focus-visible { outline: none; border-color: oklch(0.38 0.09 158); box-shadow: 0 0 0 4px oklch(0.9 0.19 128 / 0.45); }"
+    },
+    {
+      "name": "Class Pass",
+      "kind": "custom",
+      "refersTo": "pass",
+      "description": "The signature component: a ticket with a body and a tear-off stub on the pine field.",
+      "html": "<article class=\"ds-pass\"><div class=\"ds-pass-body\"><span class=\"ds-pass-cap\">Next</span><strong>CIS 321</strong><span>Operating Systems</span></div><div class=\"ds-pass-stub\"><span class=\"ds-pass-cap\">Today's schedule</span><span>11:00 CIS 321</span><span>13:00 SWE 312</span></div></article>",
+      "css": ".ds-pass { --stub: 180px; display: grid; grid-template-columns: 1fr var(--stub); min-width: 460px; border-radius: 24px; overflow: hidden; background: radial-gradient(110% 90% at 100% 0%, oklch(0.9 0.19 128 / 0.24), transparent 58%), repeating-linear-gradient(118deg, transparent 0 13px, oklch(0.98 0.012 140 / 0.05) 13px 14px), oklch(0.33 0.075 160); color: oklch(0.98 0.012 140); font: 500 14px/1.4 'Mona Sans Variable', system-ui, sans-serif; -webkit-mask: radial-gradient(circle 12px at calc(100% - var(--stub)) 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 12px at calc(100% - var(--stub)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; mask: radial-gradient(circle 12px at calc(100% - var(--stub)) 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 12px at calc(100% - var(--stub)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; } .ds-pass-body, .ds-pass-stub { display: flex; flex-direction: column; gap: 6px; padding: 24px; } .ds-pass-body strong { font-size: 52px; font-weight: 780; font-stretch: 112%; letter-spacing: -0.035em; line-height: 0.95; } .ds-pass-stub { border-inline-start: 2px dashed oklch(0.98 0.012 140 / 0.3); } .ds-pass-cap { font-size: 11px; font-weight: 660; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.84 0.05 150); }"
+    },
+    {
+      "name": "Side Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "A page in the side navigation; the open page is a pine pill.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item\" aria-current=\"page\" href=\"#\">Today</a><a class=\"ds-nav-item\" href=\"#\">Academics</a></nav>",
+      "css": ".ds-nav { display: grid; gap: 2px; width: 228px; } .ds-nav-item { display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 12px; color: oklch(0.44 0.022 165); font: 500 15px/1 'Mona Sans Variable', system-ui, sans-serif; text-decoration: none; transition: background-color 150ms ease, color 150ms ease; } .ds-nav-item:hover { background: oklch(0.958 0.008 150); color: oklch(0.21 0.028 165); } .ds-nav-item[aria-current='page'] { background: oklch(0.33 0.075 160); color: oklch(0.985 0.012 140); font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pass Wallet",
+    "overview": "What a student carries is a pass. The next class, a reward voucher and the points balance are drawn as tickets with a tear-off stub, on a bright ground of soft white cards. The system is consumer-grade and energetic rather than administrative: colour does real jobs at page scale, controls are pills, and motion is short and purposeful.",
+    "keyCharacteristics": [
+      "At most one pine field per screen; orange is reserved for points.",
+      "White cards with a 20px radius and a soft green-tinted shadow.",
+      "Pill controls; lime only on pine or as the assistant's mark.",
+      "One grotesque in three widths.",
+      "Light and dark themes; English and Arabic with right-to-left mirroring."
+    ],
+    "rules": [
+      { "name": "The One Field Rule", "body": "A screen has at most one pine field. If two things compete for it, one of them is a card.", "section": "colors" },
+      { "name": "The Lime Is A Signal Rule", "body": "Lime never fills a large area in light mode. It marks the action on a pass, the current stop, and the assistant.", "section": "colors" },
+      { "name": "The Colour Has A Job Rule", "body": "Blue, orange and orchid name modules; green, yellow and red name states. None is decoration.", "section": "colors" },
+      { "name": "The Caption Stays On The Pass Rule", "body": "Uppercase tracked captions appear only as field names printed on a pass.", "section": "typography" }
+    ],
+    "dos": [
+      "Do give each screen one thing to carry and draw it as a pass or a pine field.",
+      "Do keep controls as pills, cards at 20px and fields at 12px.",
+      "Do lead list rows with an icon tile in the row's module or state colour.",
+      "Do label anything simulated or stored on the device."
+    ],
+    "donts": [
+      "Don't bring back the dark side rail, ink buttons or flat hairline-ruled sheets of the rejected first rebuild.",
+      "Don't use lime as a large fill in light mode, or white text on lime or orange.",
+      "Don't put an uppercase label above a heading.",
+      "Don't let the assistant submit, reserve or spend without a confirmation card."
+    ]
+  }
+}

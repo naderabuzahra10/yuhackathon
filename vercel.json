@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://unijourney-yu-a12fda.fly.dev/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
